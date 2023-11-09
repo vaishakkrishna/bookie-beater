@@ -43,7 +43,7 @@ class OddsJam(Sportsbook):
         result = []
         for o in odds_data:
             meta = OddsRecordMetadata(
-                market_id=resp["id"], line_name=o["name"])
+                market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"])
             result.append(OddsRecord(
                 metadata=meta, timestamp=datetime.now(), price=o["price"]))
         return result

@@ -8,6 +8,7 @@ from .utils import PyObjectId
 class OddsRecordMetadata(BaseModel):
     market_id: str
     line_name: str
+    sportsbook_name: str
 
 
 class OddsRecord(BaseModel):
