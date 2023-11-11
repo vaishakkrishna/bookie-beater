@@ -1,12 +1,15 @@
 from typing import Dict
 from datetime import datetime, timedelta
 from models import Market
+from abc import ABC, abstractmethod
 
 
-class Sportsbook:
+class Sportsbook(ABC):
     def __init__(self, name: str = None):
+        super().__init__()
         self.name = name
 
+    @abstractmethod
     def get_current_odds(self, game_id: str, market_name: str, team_name: str) -> int:
         '''get the current in-play American odds value for a particular team
         in a market.
@@ -22,6 +25,7 @@ class Sportsbook:
         '''
         pass
 
+    @abstractmethod
     def get_prematch_odds(self, market_id: str, team_name: str) -> int:
         '''gets the American odds value for a market 5 minutes before a game started.
         For use with historical odds.
@@ -33,6 +37,7 @@ class Sportsbook:
         '''
         pass
 
+    @abstractmethod
     def get_games(self, sport: str, from_date: datetime = datetime.now(), to_date: datetime = (datetime.now() + timedelta(days=3)), limit: int = 100):
         '''Get a list of previous/upcoming game information (if supported) for a particular sport
 
@@ -47,6 +52,7 @@ class Sportsbook:
         '''
         pass
 
+    @abstractmethod
     def get_markets(self, game_id: str) -> Dict[str, Dict]:
         '''get all the market ids
 
@@ -57,6 +63,7 @@ class Sportsbook:
         '''
         pass
 
+    @abstractmethod
     def get_moneyline_odds(self, game_id: str, team_name: str) -> int:
         '''get moneyline odds of a team right now.
 
