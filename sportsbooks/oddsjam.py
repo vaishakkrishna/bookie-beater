@@ -1,11 +1,11 @@
-from .sportsbook import Sportsbook
+from .SportsBook import Sportsbook
 from sports import BASKETBALL
 from OddsJamClient import OddsJamClient
 from datetime import datetime, timedelta
 from typing import Dict, List
 import requests
 import json
-from .sportsbook import DRAFTKINGS, BOVADA
+from .SportsBook import DRAFTKINGS, BOVADA
 from models import Game, Market, OddsRecord, OddsRecordMetadata
 
 
@@ -38,7 +38,10 @@ class OddsJam(Sportsbook):
             "sportsbook": sportsbooks,
         }
         params.update({"team_id": team_id} if team_id else {})
-        resp = requests.get(endpt, params=params).json()["data"][0]
+        try:
+            resp = requests.get(endpt, params=params).json()["data"][0]
+        except:
+            return []
         odds_data = resp["odds"]
         result = []
         for o in odds_data:
@@ -59,7 +62,7 @@ class OddsJam(Sportsbook):
         '''
         pass
 
-    def get_games(self, sport: str, from_date: datetime = datetime.now(),
+    def get_games(self, sport: str, from_date: datetime = datetime.now() + timedelta(hours=12),
                   to_date: datetime = (
             datetime.now() + timedelta(days=3)),
             league: str = None, limit: int = 100):
@@ -107,9 +110,9 @@ class OddsJam(Sportsbook):
     def get_markets(self, game_id: str, limit=3) -> Dict[str, Dict]:
         '''get all the market ids
 
-        :param game_id: _description_
+        :param game_id: universal game id 
         :type game_id: str
-        :return: _description_
+        :return: get a list of all the markets of a game
         :rtype: Dict[str, Dict]
         '''
         # TODO: implement large numbers of markets, convert to market class
@@ -143,3 +146,37 @@ class OddsJam(Sportsbook):
         params.update({"sport": sport} if sport else {})
         return requests.get(endpt, params=params).json()[
             "data"][0]["id"]
+
+    def get_historical_odds(self, game_id: str, market_name: str, team_id: str = None, sportsbooks: List[str] = [DRAFTKINGS]) -> Dict[str, int]:
+        '''get the historical American odds value for a particular team
+        in a market, given a list of sportsbooks
+
+        :param game_id: universal game_id
+        :type game_id: str
+        :param market_name: universal market name
+        :type market_name: str
+        :param team_id: id of the team we want odds for
+        :type team_id: str
+        :return: map of sportsbook names to american odds
+        :rtype: Dict[str, int]
+        '''
+        endpt = f"{self.api_base}/historical-odds"
+        params = {
+            "key": self.api_key,
+            "game_id": game_id,
+            "market_name": market_name,
+            "sportsbook": sportsbooks,
+        }
+        params.update({"team_id": team_id} if team_id else {})
+        try:
+            resp = requests.get(endpt, params=params).json()["data"][0]
+        except:
+            return []
+        odds_data = resp["odds"]
+        result = []
+        for o in odds_data:
+            meta = OddsRecordMetadata(
+                market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"])
+            result.append(OddsRecord(
+                metadata=meta, timestamp=datetime.now(), price=o["price"]))
+        return result
