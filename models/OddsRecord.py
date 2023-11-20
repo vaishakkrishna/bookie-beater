@@ -5,19 +5,16 @@ from datetime import datetime
 from .utils import PyObjectId
 
 
-class OddsRecordMetadata(BaseModel):
+class OddsRecord(BaseModel):
+    id: PyObjectId = Field(alias="_id", default=None)
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    # metadata
     # unique identifier of the market
     market_id: str
     # name of the market (e.g. team1 Moneyline)
     line_name: str
     # name of the sportsbook providing the line
     sportsbook_name: str
-
-
-class OddsRecord(BaseModel):
-    id: PyObjectId = Field(alias="_id", default=None)
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-    # metadata
-    metadata: OddsRecordMetadata
     timestamp: datetime
+    # price in american odds
     price: int
