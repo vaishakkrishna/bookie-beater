@@ -6,7 +6,7 @@ from typing import Dict, List
 import requests
 import json
 from models.SportsBook import DRAFTKINGS, BOVADA
-from models import Game, Market, OddsRecord, OddsRecordMetadata
+from models import Game, OddsRecord, OddsRecordMetadata
 
 
 class OddsJam(Sportsbook):
@@ -45,10 +45,8 @@ class OddsJam(Sportsbook):
         odds_data = resp["odds"]
         result = []
         for o in odds_data:
-            meta = OddsRecordMetadata(
-                market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"])
-            result.append(OddsRecord(
-                metadata=meta, timestamp=datetime.now(), price=o["price"]))
+            result.append(OddsRecord(market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"],
+                                     imestamp=datetime.now(), price=o["price"]))
         return result
 
     def get_prematch_odds(self, market_id: str, team_name: str) -> int:
@@ -176,7 +174,7 @@ class OddsJam(Sportsbook):
         result = []
         for o in odds_data:
             meta = OddsRecordMetadata(
-                market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"])
-            result.append(OddsRecord(
-                metadata=meta, timestamp=datetime.now(), price=o["price"]))
+            )
+            result.append(OddsRecord(market_id=resp["id"], line_name=o["name"], sportsbook_name=o["sports_book_name"],
+                                     timestamp=datetime.now(), price=o["price"]))
         return result
