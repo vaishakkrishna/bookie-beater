@@ -1,11 +1,11 @@
-from .SportsBook import Sportsbook
+from models.SportsBook import Sportsbook
 from sports import BASKETBALL
 from OddsJamClient import OddsJamClient
 from datetime import datetime, timedelta
 from typing import Dict, List
 import requests
 import json
-from .SportsBook import DRAFTKINGS, BOVADA
+from models.SportsBook import DRAFTKINGS, BOVADA
 from models import Game, Market, OddsRecord, OddsRecordMetadata
 
 
@@ -97,8 +97,8 @@ class OddsJam(Sportsbook):
                 else:
                     raise NotImplemented(
                         "Games other than Basketball are not supported!")
-                games.append(Game(game_id=g["game_id"],
-                                  game_name=g["description"],
+                games.append(Game(id=g["game_id"],
+                                  name=g["description"],
                                   start_timestamp=g["start_date"],
                                   sport=g["sport"],
                                   league=g["league"],
