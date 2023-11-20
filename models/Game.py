@@ -8,9 +8,12 @@ from datetime import datetime
 class Game(BaseModel):
     id: PyObjectId = Field(alias="_id", default=None)
     model_config = ConfigDict(arbitrary_types_allowed=True)
-    game_id: str
-    game_name: str
+
+    name: str
     start_timestamp: datetime
     sport: str
     league: str
+    # list of  `Team` ids
     teams: List[str]
+    # team id of winning team
+    winner: str
