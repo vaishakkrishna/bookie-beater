@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from pydantic import ConfigDict, Field
-from typing import List, Dict
+from typing import List
 from .utils import PyObjectId
 
 
@@ -13,5 +13,5 @@ class Market(BaseModel):
     game_id: str
     # name of the lines (team1/team2 moneyline, player under/over, etc.)
     lines: List[str]
-    # maps lines to American odds
-    prematch_odds: Dict[str, int]
+    # name of the winning line
+    result: str = None

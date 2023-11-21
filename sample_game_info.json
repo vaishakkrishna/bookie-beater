@@ -1,0 +1,131 @@
+{
+    "id": 5912630,
+    "is-double": false,
+    "superTemplate": {
+        "id": "",
+        "name": "",
+        "url": "",
+        "shortUrl": ""
+    },
+    "home": 15791088,
+    "away": 15791089,
+    "home-name": "Boston Celtics",
+    "away-name": "Golden State Warriors",
+    "home-country-two-chart-name": "us",
+    "away-country-two-chart-name": "us",
+    "home-participant-id": 1,
+    "away-participant-id": 1,
+    "status-id": 3,
+    "event-stage-id": 3,
+    "event-stage-name": "Finished",
+    "event-stage-name-short": "",
+    "tournament_id": 58751,
+    "tournament-stage-id": 97668,
+    "tournament-stage-type-id": 11,
+    "tournament-stage-group-id": 0,
+    "tournament-stage-name": " - Play Offs",
+    "sport-id": 3,
+    "cols": "1|2",
+    "home-participant-images": [
+        "/serve/images/team-logo/Men/MVgCbbj9-0tHj7MWK.png?231120072908"
+    ],
+    "away-participant-images": [
+        "/serve/images/team-logo/Men/lf5zrq6n-M5fifScn.png?231120072908"
+    ],
+    "encodeEventId": "j3bM4Y8o",
+    "colClassName": "datet t1655427600-2-0-0-1",
+    "homeParticipantTypes": [
+        1
+    ],
+    "awayParticipantTypes": [
+        1
+    ],
+    "ftOnly": false,
+    "ftOnlyText": "",
+    "ftOnlyTextShort": "",
+    "url": "/basketball/usa/nba-2021-2022/boston-celtics-golden-state-warriors-j3bM4Y8o/",
+    "date-start-base": 1655427600,
+    "date-start-timestamp": 1655427600,
+    "result": "90:103",
+    "homeResult": "90",
+    "awayResult": "103",
+    "homeTextInResult": "",
+    "awayTextInResult": "",
+    "home-winner": "lost",
+    "away-winner": "win",
+    "postmatchResult": "90:103",
+    "info": [
+        {
+            "name": "6th leg.",
+            "sort_key": 0
+        },
+        {
+            "name": "Golden State Warriors wins series 4-2.",
+            "sort_key": 1
+        }
+    ],
+    "partialresult": "22:27, 17:27, 27:22, 24:27",
+    "country-id": 200,
+    "country-name": "USA",
+    "country-two-chart-name": "us",
+    "country-type": "Country",
+    "tournament-id": 58751,
+    "tournament-name": "NBA 2021/2022",
+    "tournament-url": "nba-2021-2022",
+    "sport-url-name": "basketball",
+    "breadcrumbs": {
+        "sport": {
+            "name": "Basketball",
+            "url": "/basketball/"
+        },
+        "country": {
+            "name": "USA",
+            "url": "/basketball/usa/"
+        },
+        "tournament": {
+            "name": "NBA 2021/2022",
+            "url": "/basketball/usa/nba-2021-2022/"
+        }
+    },
+    "stream": {
+        "141": 1,
+        "165": 1,
+        "49": 1,
+        "411": 1,
+        "45": 1,
+        "43": 1,
+        "33": 1,
+        "24": 1,
+        "163": 1,
+        "46": 1
+    },
+    "bookmakersCount": 15,
+    "betting_type": 3,
+    "winner_post": 1,
+    "odds": [
+        {
+            "avgOdds": 1.59,
+            "bettingTypeId": 3,
+            "eventId": 5912630,
+            "maxOdds": 1.66,
+            "outcomeResultId": 2,
+            "scopeId": 1,
+            "outcomeId": "5ke1mx2rrhkx0xf1svg",
+            "maxOddsProviderId": 550,
+            "active": true
+        },
+        {
+            "avgOdds": 2.43,
+            "bettingTypeId": 3,
+            "eventId": 5912630,
+            "maxOdds": 2.55,
+            "outcomeResultId": 1,
+            "scopeId": 1,
+            "outcomeId": "5ke1mx2rrhkx0xf1svh",
+            "maxOddsProviderId": 16,
+            "active": true
+        }
+    ],
+    "name": "Boston Celtics - Golden State Warriors",
+    "colClassNameTime": "datet t1655427600-1-1-0-0"
+}

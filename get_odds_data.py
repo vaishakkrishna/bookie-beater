@@ -2,10 +2,11 @@ import requests
 
 
 def get_game_odds_data():
-    
+
     headers = {
         'Accept': 'application/json, text/plain, */*',
-        'Referer': 'https://www.oddsportal.com/basketball/usa/nba-2021-2022/boston-celtics-golden-state-warriors-j3bM4Y8o/', # game id is last bit of url
+        # game id is last bit of url
+        'Referer': 'https://www.oddsportal.com/basketball/usa/nba-2021-2022/boston-celtics-golden-state-warriors-j3bM4Y8o/',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
@@ -14,8 +15,10 @@ def get_game_odds_data():
         'X-XSRF-TOKEN': 'eyJpdiI6Ijd4TWxWYzF4WjF5b0d5SE5uMFJEQ3c9PSIsInZhbHVlIjoiWUlYcEgyWU9uRkljRTFEVmVleWhYRkVpa2VmeklWSEZCejYrL3BSdlEwWEhaTmFSeEpERDVCdlgxNk1QNnVuQmx1RHVIaTVoNmRsa2V0ZHh0aFNpMDZaSGZqTFVsVEd1eStjc1JqNGQyVlBMVzhrS2tpalZNc0JQaFN0S2dCMmYiLCJtYWMiOiIzNmVhYjYwODM4M2YxNmQxYTliZjdjODZlZTJlYTM4MGQyYWMyODYyMTBjODVmYjdkYjRhNjk3NzM0Zjc4YzRmIiwidGFnIjoiIn0=',
     }
     # f"1-3-{game_id}-3-1-{}.dat"
-    event_name = "1-3-j3bM4Y8o-3-1-yj7d2.dat"  # 3-1 at the end indicates moneyline and FT including OT
-    response = requests.get(f'https://www.oddsportal.com/feed/match-event/{event_name}', headers=headers)
+    # 3-1 at the end indicates moneyline and FT including OT
+    event_name = "1-3-j3bM4Y8o-3-1-yj7d2.dat"
+    response = requests.get(
+        f'https://www.oddsportal.com/feed/match-event/{event_name}', headers=headers)
     return response
 
 
@@ -61,13 +64,20 @@ def get_game_data():
     }
 
     params = {
-        '_': '1699589768425', # epoch time
+        '_': '1699589768425',  # epoch time
     }
 
     response = requests.get(
-        'https://www.oddsportal.com/ajax-sport-country-tournament-archive_/3/tpisHrh3/X220577834X24584X65536X0X134217728X0X0X0X0X0X0X0X10485760X134217729X512X1048578X0X0X1024X18464X131584X2304/1/0/',
+        # 'https://www.oddsportal.com/ajax-sport-country-tournament-archive_/3/tpisHrh3/X220577834X24584X65536X0X134217728X0X0X0X0X0X0X0X10485760X134217729X512X1048578X0X0X1024X18464X131584X2304/1/0/',
+        "https://www.oddsportal.com/basketball/usa/nba-2021-2022/results/",
         params=params,
         cookies=cookies,
         headers=headers,
     )
-    return response.json()
+    return response.text
+    # return response.json()
+    
+
+
+with open("game_data_test.html", "w") as f:
+    f.write(get_game_data())

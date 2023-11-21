@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from pydantic import ConfigDict, Field
-from typing import List
+from typing import List, Dict
 from .utils import PyObjectId
 from datetime import datetime
 
@@ -18,3 +18,7 @@ class Game(BaseModel):
     league: str
     # list of  `Team` ids
     teams: List[str]
+    # map of `Team` ids to scores
+    scores: Dict[str, int]
+    # metadata
+    metadata: dict
