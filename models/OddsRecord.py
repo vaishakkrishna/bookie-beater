@@ -3,6 +3,7 @@ from pydantic import ConfigDict, Field
 from typing import List, Dict
 from datetime import datetime
 from .utils import PyObjectId
+import json
 
 
 class OddsRecord(BaseModel):
@@ -16,3 +17,12 @@ class OddsRecord(BaseModel):
     timestamp: datetime
     # maps sportsbooks to prices
     prices: Dict[str, int]
+
+    @staticmethod
+    def odds_from_json(path: str):
+        with open(path, "r") as f:
+            odds_json = json.load(f)
+        if type(odds_json) == list:
+            return [OddsRecord(**o) for o in odds_json]
+        else:
+            return OddsRecord(**odds_json)
