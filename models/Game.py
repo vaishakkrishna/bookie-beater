@@ -4,6 +4,7 @@ from typing import List, Dict
 from .utils import PyObjectId
 from datetime import datetime
 from .Market import Market
+import json
 
 
 class Game(BaseModel):
@@ -25,3 +26,18 @@ class Game(BaseModel):
     markets: List[Market] = []
     # metadata
     metadata: dict = {}
+
+    @classmethod
+    def games_from_json(path: str):
+        '''load a game or list of games
+        from json
+
+        :param path: path to json file of games
+        :type path: str
+        '''
+        with open(path, "r") as f:
+            games_json = json.load(f)
+        if type(games_json) == list:
+            return [Game(**g) for g in games_json]
+        else:
+            return Game(**games_json)

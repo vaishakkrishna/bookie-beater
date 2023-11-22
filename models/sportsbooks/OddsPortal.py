@@ -68,10 +68,11 @@ class OddsPortal(Sportsbook):
                     market_id="", line_name=f"{t2_name} to win",
                     sportsbook_name=bookie, timestamp=game.start_timestamp,
                     price=int(t2_odd))
-
+                all_odds.append(or1)
+                all_odds.append(or2)
             except:
                 pass
-        return {t1_name: t1_odds_dict, t2_name: t2_odds_dict}
+        return all_odds
 
     def get_games_by_year(self, start_year: int = 2022, start_page: int = 1):
 
