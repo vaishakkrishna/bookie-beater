@@ -27,7 +27,7 @@ class Game(BaseModel):
     # metadata
     metadata: dict = {}
 
-    @classmethod
+    @staticmethod
     def games_from_json(path: str):
         '''load a game or list of games
         from json

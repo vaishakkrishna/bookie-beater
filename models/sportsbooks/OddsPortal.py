@@ -27,7 +27,7 @@ class OddsPortal(Sportsbook):
         # game links by year
         self.game_links = defaultdict(list)
 
-    def get_game_odds_from_game(self, game: Game) -> List[OddsRecord]:
+    def get_game_odds(self, game: Game) -> List[OddsRecord]:
         '''Gets moneyline odds for a game. Indexed by team name, then bookmaker name
 
         :param game_link: _description_
@@ -56,22 +56,27 @@ class OddsPortal(Sportsbook):
             by="xpath", value=t2_odds_xpath)]
         zipped_odds = zip(bookie_names, t1_odds, t2_odds)
         all_odds = []
+        t1_prices = {}
+        t2_prices = {}
+
         for bookie, t1_odd, t2_odd in zipped_odds:
             try:
-                or1 = OddsRecord(
-                    _id=bson.ObjectId(),
-                    market_id="", line_name=f"{t1_name} to win",
-                    sportsbook_name=bookie, timestamp=game.start_timestamp,
-                    price=int(t1_odd))
-                or2 = OddsRecord(
-                    _id=bson.ObjectId(),
-                    market_id="", line_name=f"{t2_name} to win",
-                    sportsbook_name=bookie, timestamp=game.start_timestamp,
-                    price=int(t2_odd))
-                all_odds.append(or1)
-                all_odds.append(or2)
-            except:
-                pass
+                t1_prices[bookie] = int(t1_odd)
+                t2_prices[bookie] = int(t2_odd)
+            except Exception as e:
+                print(e)
+        or1 = OddsRecord(
+            _id=bson.ObjectId(),
+            market_id=str(game.markets[0].id), line_name=f"{t1_name} to win",
+            timestamp=game.start_timestamp,
+            prices=t1_prices)
+        or2 = OddsRecord(
+            _id=bson.ObjectId(),
+            market_id=str(game.markets[0].id), line_name=f"{t2_name} to win",
+            timestamp=game.start_timestamp,
+            prices=t2_prices)
+        all_odds.append(or1)
+        all_odds.append(or2)
         return all_odds
 
     def get_games_by_year(self, start_year: int = 2022, start_page: int = 1):

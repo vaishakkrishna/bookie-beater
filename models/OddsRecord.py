@@ -13,8 +13,6 @@ class OddsRecord(BaseModel):
     market_id: str
     # name of the market (e.g. team1 Moneyline)
     line_name: str
-    # name of the sportsbook providing the line
-    sportsbook_name: str
     timestamp: datetime
-    # price in american odds
-    price: int
+    # maps sportsbooks to prices
+    prices: Dict[str, int]
