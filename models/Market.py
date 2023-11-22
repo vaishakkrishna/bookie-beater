@@ -9,9 +9,7 @@ class Market(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     # name of the market (Moneyline, Over/Under x, etc.)
     market_name: str
-    # id of the game associated with the market
-    game_id: str
     # name of the lines (team1/team2 moneyline, player under/over, etc.)
     lines: List[str]
     # name of the winning line
-    result: str = None
+    winning_line: str = None
