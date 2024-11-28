@@ -1,7 +1,2 @@
-matplotlib==3.8.1
-pandas==2.1.2
 python-dotenv==1.0.0
-oddsjam-api==0.2.9
 requests==2.31.0
-pymongo==4.6.0
-selenium-wire==5.1.0
